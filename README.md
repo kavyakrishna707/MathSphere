@@ -32,6 +32,8 @@ CSS3
 
 JavaScript
 
+KaTeX (LaTeX Mathematical Notation Engine)
+
 🚀 How to Run
 
 Clone the repository:

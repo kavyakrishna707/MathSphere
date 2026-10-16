@@ -18,6 +18,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all modules
   initThemeAndUI();
+  initMathRendering();
   initSearchAndFilter();
   initScientificCalculator();
   initMatrixCalculator();
@@ -27,6 +28,50 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuiz();
   initLearningHubLinks();
 });
+
+/* ==========================================================================
+   MODULE 0: KATEX MATH RENDERING CONFIGURATION
+   ========================================================================== */
+
+/**
+ * KaTeX Math Notation Renderer
+ * Scans the provided DOM element and converts LaTeX delimiters:
+ * - Display math: $$...$$ and \[...\]
+ * - Inline math: $...$ and \(...\)
+ */
+function renderMath(element = document.body) {
+  if (typeof renderMathInElement === 'function') {
+    try {
+      renderMathInElement(element, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (err) {
+      console.warn('KaTeX rendering notice:', err);
+    }
+  }
+}
+
+function initMathRendering() {
+  if (typeof renderMathInElement === 'function') {
+    renderMath(document.body);
+  } else {
+    // Retry once deferred scripts finish loading
+    window.addEventListener('load', () => renderMath(document.body));
+    const timer = setInterval(() => {
+      if (typeof renderMathInElement === 'function') {
+        clearInterval(timer);
+        renderMath(document.body);
+      }
+    }, 50);
+    setTimeout(() => clearInterval(timer), 3000);
+  }
+}
 
 /* ==========================================================================
    MODULE 1: UI INFRASTRUCTURE (Theme, Mobile Nav, Toast, Year)
@@ -740,6 +785,7 @@ function initMatrixCalculator() {
     explanationBox.innerHTML = explanation;
     resultContainer.style.display = 'block';
     lastComputedMatrix = matrix;
+    renderMath(explanationBox);
 
     if (typeof matrix === 'number') {
       // Scalar result (like determinant)
@@ -1060,7 +1106,7 @@ function initMatrixCalculator() {
       displayMatrixResult(
         'Determinant: det(B)',
         detVal,
-        `<strong>Determinant:</strong> $\\det(B) = ${detVal}$. ${detVal !== 0 ? 'Matrix B is non-singular.' : 'Matrix B is singular ($\det = 0$).'}`
+        `<strong>Determinant:</strong> $\\det(B) = ${detVal}$. ${detVal !== 0 ? 'Matrix B is non-singular.' : 'Matrix B is singular ($\\det(B) = 0$).'}`
       );
     } catch (err) {
       showMatrixError(err.message);
@@ -1453,36 +1499,37 @@ function initAlgebraSolver() {
       return;
     }
 
-    let html = `<h4 class="solution-header">Solution for Linear Equation: ${a}x + (${b}) = ${c}</h4>`;
+    let html = `<h4 class="solution-header">Solution for Linear Equation: $${a}x + (${b}) = ${c}$</h4>`;
 
     // Special case a == 0
     if (Math.abs(a) < 1e-12) {
       if (Math.abs(b - c) < 1e-12) {
-        html += `<div class="solution-step"><strong>Special Case (a = 0):</strong> The equation simplifies to <code>${b} = ${c}</code>, which is an identity (always true).</div>`;
-        html += `<div class="solution-highlight">Infinite Solutions: Any real number x satisfies the equation.</div>`;
+        html += `<div class="solution-step"><strong>Special Case ($a = 0$):</strong> The equation simplifies to $${b} = ${c}$, which is an identity (always true).</div>`;
+        html += `<div class="solution-highlight">Infinite Solutions: Any real number $x$ satisfies the equation.</div>`;
       } else {
-        html += `<div class="solution-step"><strong>Special Case (a = 0):</strong> The equation simplifies to <code>${b} = ${c}</code>, which is a mathematical contradiction (${b} ≠ ${c}).</div>`;
-        html += `<div class="solution-highlight" style="border-left-color:var(--error); color:var(--error);">No Solution: The solution set is empty (∅).</div>`;
+        html += `<div class="solution-step"><strong>Special Case ($a = 0$):</strong> The equation simplifies to $${b} = ${c}$, which is a mathematical contradiction ($${b} \\neq ${c}$).</div>`;
+        html += `<div class="solution-highlight" style="border-left-color:var(--error); color:var(--error);">No Solution: The solution set is empty ($\\emptyset$).</div>`;
       }
     } else {
       const step1Right = c - b;
       const x = step1Right / a;
       const formattedX = Math.abs(x) < 1e-12 ? 0 : parseFloat(x.toFixed(6));
 
-      html += `<div class="solution-step"><strong>Step 1: Subtract constant b (${b}) from both sides:</strong><br>
-        <code>${a}x = ${c} - (${b})</code><br>
-        <code>${a}x = ${step1Right}</code>
+      html += `<div class="solution-step"><strong>Step 1: Subtract constant $b$ ($${b}$) from both sides:</strong><br>
+        $${a}x = ${c} - (${b})$<br>
+        $${a}x = ${step1Right}$
       </div>`;
 
-      html += `<div class="solution-step"><strong>Step 2: Divide both sides by coefficient a (${a}):</strong><br>
-        <code>x = ${step1Right} / ${a}</code>
+      html += `<div class="solution-step"><strong>Step 2: Divide both sides by coefficient $a$ ($${a}$):</strong><br>
+        $x = \\frac{${step1Right}}{${a}}$
       </div>`;
 
-      html += `<div class="solution-highlight">Exact Solution: x = ${formattedX}</div>`;
+      html += `<div class="solution-highlight">Exact Solution: $x = ${formattedX}$</div>`;
     }
 
     linearOutput.innerHTML = html;
     linearOutput.style.display = 'block';
+    renderMath(linearOutput);
   }
 
   btnSolveLinear.addEventListener('click', solveLinear);
@@ -1516,31 +1563,32 @@ function initAlgebraSolver() {
       return;
     }
 
-    let html = `<h4 class="solution-header">Solution for Quadratic: (${a})x² + (${b})x + (${c}) = 0</h4>`;
+    let html = `<h4 class="solution-header">Solution for Quadratic: $(${a})x^2 + (${b})x + (${c}) = 0$</h4>`;
 
     // Case a = 0 (Linear degeneration)
     if (Math.abs(a) < 1e-12) {
-      html += `<div class="solution-step"><strong>Linear Degeneration (a = 0):</strong> Since coefficient $a = 0$, the quadratic term vanishes, reducing to a linear equation: <code>${b}x + ${c} = 0</code>.</div>`;
+      html += `<div class="solution-step"><strong>Linear Degeneration ($a = 0$):</strong> Since coefficient $a = 0$, the quadratic term vanishes, reducing to a linear equation: $${b}x + ${c} = 0$.</div>`;
       if (Math.abs(b) < 1e-12) {
         if (Math.abs(c) < 1e-12) {
-          html += `<div class="solution-highlight">Infinite Solutions (Identity 0 = 0).</div>`;
+          html += `<div class="solution-highlight">Infinite Solutions (Identity $0 = 0$).</div>`;
         } else {
-          html += `<div class="solution-highlight" style="border-left-color:var(--error); color:var(--error);">No Solution (Contradiction ${c} = 0).</div>`;
+          html += `<div class="solution-highlight" style="border-left-color:var(--error); color:var(--error);">No Solution (Contradiction $${c} = 0$).</div>`;
         }
       } else {
         const xLinear = -c / b;
-        html += `<div class="solution-highlight">Linear Root: x = ${parseFloat(xLinear.toFixed(6))}</div>`;
+        html += `<div class="solution-highlight">Linear Root: $x = ${parseFloat(xLinear.toFixed(6))}$</div>`;
       }
       quadOutput.innerHTML = html;
       quadOutput.style.display = 'block';
+      renderMath(quadOutput);
       return;
     }
 
     // Discriminant Delta = b^2 - 4ac
     const delta = (b * b) - (4 * a * c);
-    html += `<div class="solution-step"><strong>Step 1: Compute the Discriminant (Δ = b² − 4ac):</strong><br>
-      <code>Δ = (${b})² − 4(${a})(${c})</code><br>
-      <code>Δ = ${b * b} − (${4 * a * c}) = <strong>${delta}</strong></code>
+    html += `<div class="solution-step"><strong>Step 1: Compute the Discriminant ($\\Delta = b^2 - 4ac$):</strong><br>
+      $\\Delta = (${b})^2 - 4(${a})(${c})$<br>
+      $\\Delta = ${b * b} - (${4 * a * c}) = \\mathbf{${delta}}$
     </div>`;
 
     const twoA = 2 * a;
@@ -1552,39 +1600,39 @@ function initAlgebraSolver() {
       const x1 = (negB + sqrtDelta) / twoA;
       const x2 = (negB - sqrtDelta) / twoA;
 
-      html += `<div class="solution-step"><strong>Step 2: Since Δ > 0, there are Two Distinct Real Roots:</strong><br>
-        <code>x = [ -(${b}) ± √(${delta}) ] / [ 2(${a}) ]</code><br>
-        <code>x = [ ${negB} ± ${parseFloat(sqrtDelta.toFixed(6))} ] / ${twoA}</code>
+      html += `<div class="solution-step"><strong>Step 2: Since $\\Delta > 0$, there are Two Distinct Real Roots:</strong><br>
+        $x = \\frac{-(${b}) \\pm \\sqrt{${delta}}}{2(${a})}$<br>
+        $x = \\frac{${negB} \\pm ${parseFloat(sqrtDelta.toFixed(6))}}{${twoA}}$
       </div>`;
 
       html += `<div class="solution-highlight">
-        x₁ = ${parseFloat(x1.toFixed(6))}<br>
-        x₂ = ${parseFloat(x2.toFixed(6))}
+        $x_1 = ${parseFloat(x1.toFixed(6))}$<br>
+        $x_2 = ${parseFloat(x2.toFixed(6))}$
       </div>`;
     }
     // Case 2: Delta == 0 (One repeated real root)
     else if (Math.abs(delta) < 1e-12) {
       const x = negB / twoA;
-      html += `<div class="solution-step"><strong>Step 2: Since Δ = 0, there is Exactly One Repeated Real Root:</strong><br>
-        <code>x = -b / (2a) = ${negB} / ${twoA}</code>
+      html += `<div class="solution-step"><strong>Step 2: Since $\\Delta = 0$, there is Exactly One Repeated Real Root:</strong><br>
+        $x = -\\frac{b}{2a} = \\frac{${negB}}{${twoA}}$
       </div>`;
 
-      html += `<div class="solution-highlight">Single Repeated Root: x = ${parseFloat(x.toFixed(6))}</div>`;
+      html += `<div class="solution-highlight">Single Repeated Root: $x = ${parseFloat(x.toFixed(6))}$</div>`;
     }
     // Case 3: Delta < 0 (Complex conjugate roots)
     else {
       const realPart = negB / twoA;
       const imagPart = Math.sqrt(-delta) / Math.abs(twoA);
 
-      html += `<div class="solution-step"><strong>Step 2: Since Δ < 0 (${delta}), the roots are Complex Conjugates (u ± vi):</strong><br>
-        <code>x = [ -b ± i√(|Δ|) ] / (2a)</code><br>
-        <code>Real Part (u) = ${negB} / ${twoA} = ${parseFloat(realPart.toFixed(6))}</code><br>
-        <code>Imaginary Part (v) = √(${-delta}) / ${Math.abs(twoA)} = ${parseFloat(imagPart.toFixed(6))}</code>
+      html += `<div class="solution-step"><strong>Step 2: Since $\\Delta < 0$ (${delta}), the roots are Complex Conjugates ($u \\pm vi$):</strong><br>
+        $x = \\frac{-b \\pm i\\sqrt{|\\Delta|}}{2a}$<br>
+        $\\text{Real Part } (u) = \\frac{${negB}}{${twoA}} = ${parseFloat(realPart.toFixed(6))}$<br>
+        $\\text{Imaginary Part } (v) = \\frac{\\sqrt{${-delta}}}{${Math.abs(twoA)}} = ${parseFloat(imagPart.toFixed(6))}$
       </div>`;
 
       html += `<div class="solution-highlight">
-        x₁ = ${parseFloat(realPart.toFixed(6))} + ${parseFloat(imagPart.toFixed(6))}i<br>
-        x₂ = ${parseFloat(realPart.toFixed(6))} − ${parseFloat(imagPart.toFixed(6))}i
+        $x_1 = ${parseFloat(realPart.toFixed(6))} + ${parseFloat(imagPart.toFixed(6))}i$<br>
+        $x_2 = ${parseFloat(realPart.toFixed(6))} - ${parseFloat(imagPart.toFixed(6))}i$
       </div>`;
     }
 
@@ -1595,13 +1643,14 @@ function initAlgebraSolver() {
 
     html += `<div class="solution-step" style="margin-top:16px;">
       <strong>Parabola Geometric Properties:</strong><br>
-      • Vertex: <code>(${parseFloat(vertexX.toFixed(4))}, ${parseFloat(vertexY.toFixed(4))})</code><br>
-      • Axis of Symmetry: <code>x = ${parseFloat(vertexX.toFixed(4))}</code><br>
+      • Vertex: $(${parseFloat(vertexX.toFixed(4))}, ${parseFloat(vertexY.toFixed(4))})$<br>
+      • Axis of Symmetry: $x = ${parseFloat(vertexX.toFixed(4))}$<br>
       • Orientation: Parabola ${direction}.
     </div>`;
 
     quadOutput.innerHTML = html;
     quadOutput.style.display = 'block';
+    renderMath(quadOutput);
   }
 
   btnSolveQuad.addEventListener('click', solveQuadratic);
@@ -1960,83 +2009,83 @@ function initQuiz() {
   const questions = [
     {
       category: 'Arithmetic',
-      question: 'Evaluate the expression: 18 - 3 × (4 + 2) ÷ 9',
+      question: 'Evaluate the expression: $18 - 3 \\times (4 + 2) \\div 9$',
       options: ['16', '14', '12', '10'],
       correct: 0,
-      explanation: 'Follow order of operations (PEMDAS): Parentheses first (4 + 2 = 6). Then 3 × 6 = 18. Next 18 ÷ 9 = 2. Finally 18 - 2 = 16.'
+      explanation: 'Follow order of operations (PEMDAS): Parentheses first ($4 + 2 = 6$). Then $3 \\times 6 = 18$. Next $18 \\div 9 = 2$. Finally $18 - 2 = 16$.'
     },
     {
       category: 'Number Systems',
       question: 'What is the binary representation of decimal number 42?',
       options: ['101010', '110010', '100101', '111000'],
       correct: 0,
-      explanation: '42 = 32 + 8 + 2 = (1 × 2⁵) + (0 × 2⁴) + (1 × 2³) + (0 × 2²) + (1 × 2¹) + (0 × 2⁰) = 101010₂.'
+      explanation: '$42 = 32 + 8 + 2 = (1 \\times 2^5) + (0 \\times 2^4) + (1 \\times 2^3) + (0 \\times 2^2) + (1 \\times 2^1) + (0 \\times 2^0) = 101010_2$.'
     },
     {
       category: 'Matrices',
-      question: 'If Matrix A has dimensions 3×2 and Matrix B has dimensions 2×4, what are the dimensions of the product A × B?',
-      options: ['2×2', '3×4', '3×2', 'Undefined (cannot multiply)'],
+      question: 'If Matrix $A$ has dimensions $3 \\times 2$ and Matrix $B$ has dimensions $2 \\times 4$, what are the dimensions of the product $AB$?',
+      options: ['$2 \\times 2$', '$3 \\times 4$', '$3 \\times 2$', 'Undefined (cannot multiply)'],
       correct: 1,
-      explanation: 'Matrix multiplication (m×k) × (k×n) yields dimension (m×n). Here (3×2) × (2×4) results in a 3×4 matrix.'
+      explanation: 'Matrix multiplication: If $A$ is of size $m \\times k$ and $B$ is of size $k \\times n$, then the product $AB$ has size $m \\times n$. Here ($3 \\times 2$) $\\times$ ($2 \\times 4$) results in a $3 \\times 4$ matrix.'
     },
     {
       category: 'Algebra',
-      question: 'What is the discriminant (Δ = b² − 4ac) of the equation 2x² − 4x + 2 = 0, and what does it tell us?',
+      question: 'What is the discriminant ($\\Delta = b^2 - 4ac$) of the equation $2x^2 - 4x + 2 = 0$, and what does it tell us?',
       options: [
-        'Δ = 0 (Exactly one repeated real root)',
-        'Δ = 16 (Two distinct real roots)',
-        'Δ = -16 (Two complex conjugate roots)',
-        'Δ = 4 (Two irrational roots)'
+        '$\\Delta = 0$ (Exactly one repeated real root)',
+        '$\\Delta = 16$ (Two distinct real roots)',
+        '$\\Delta = -16$ (Two complex conjugate roots)',
+        '$\\Delta = 4$ (Two irrational roots)'
       ],
       correct: 0,
-      explanation: 'Δ = (-4)² - 4(2)(2) = 16 - 16 = 0. When the discriminant is 0, the parabola touches the x-axis at exactly one point.'
+      explanation: '$\\Delta = (-4)^2 - 4(2)(2) = 16 - 16 = 0$. When the discriminant is 0, the parabola touches the x-axis at exactly one point.'
     },
     {
       category: 'Trigonometry',
-      question: 'What is the exact value of sin(30°) in degrees, or sin(π/6) in radians?',
-      options: ['1', '0.5', '√3 / 2', '√2 / 2'],
+      question: 'What is the exact value of $\\sin(30^\\circ)$ in degrees, or $\\sin(\\pi/6)$ in radians?',
+      options: ['1', '0.5', '$\\frac{\\sqrt{3}}{2}$', '$\\frac{\\sqrt{2}}{2}$'],
       correct: 1,
-      explanation: 'On the unit circle, an angle of 30° (π/6 radians) has a vertical y-coordinate of exactly 0.5 (1/2).'
+      explanation: 'On the unit circle, an angle of $30^\\circ$ ($\\pi/6$ radians) has a vertical y-coordinate of exactly $0.5$ ($1/2$).'
     },
     {
       category: 'Number Systems',
       question: 'What is the decimal equivalent of the hexadecimal number 0x2F?',
       options: ['45', '47', '32', '59'],
       correct: 1,
-      explanation: 'Hexadecimal positional expansion: (2 × 16¹) + (15 × 16⁰) = 32 + 15 = 47.'
+      explanation: 'Hexadecimal positional expansion: $(2 \\times 16^1) + (15 \\times 16^0) = 32 + 15 = 47$.'
     },
     {
       category: 'Matrices',
-      question: 'What is the determinant of the 2×2 matrix: [[3, 2], [1, 4]]?',
+      question: 'What is the determinant of the $2 \\times 2$ matrix: $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$?',
       options: ['10', '14', '7', '-2'],
       correct: 0,
-      explanation: 'For a 2×2 matrix [[a, b], [c, d]], det = ad - bc = (3)(4) - (2)(1) = 12 - 2 = 10.'
+      explanation: 'For a $2 \\times 2$ matrix $\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, $\\det(A) = ad - bc = (3)(4) - (2)(1) = 12 - 2 = 10$.'
     },
     {
       category: 'Algebra',
-      question: 'Solve for x: 5x - 7 = 3x + 9',
-      options: ['x = 8', 'x = 1', 'x = 16', 'x = 4'],
+      question: 'Solve for $x$: $5x - 7 = 3x + 9$',
+      options: ['$x = 8$', '$x = 1$', '$x = 16$', '$x = 4$'],
       correct: 0,
-      explanation: 'Subtract 3x from both sides: 2x - 7 = 9. Add 7: 2x = 16. Divide by 2: x = 8.'
+      explanation: 'Subtract $3x$ from both sides: $2x - 7 = 9$. Add 7: $2x = 16$. Divide by 2: $x = 8$.'
     },
     {
       category: 'Arithmetic',
-      question: 'What is 2³ + 3² − √64?',
+      question: 'What is $2^3 + 3^2 - \\sqrt{64}$?',
       options: ['9', '17', '8', '11'],
       correct: 0,
-      explanation: '2³ = 8, 3² = 9, and √64 = 8. Therefore, 8 + 9 - 8 = 9.'
+      explanation: '$2^3 = 8$, $3^2 = 9$, and $\\sqrt{64} = 8$. Therefore, $8 + 9 - 8 = 9$.'
     },
     {
       category: 'Matrices',
-      question: 'A square matrix A is called "singular" if and only if:',
+      question: 'A square matrix $A$ is called "singular" if and only if:',
       options: [
-        'Its determinant is equal to 0 (det A = 0)',
+        'Its determinant is equal to 0 ($\\det(A) = 0$)',
         'All its elements are zero',
         'It has an inverse matrix',
         'Its transpose equals itself'
       ],
       correct: 0,
-      explanation: 'By definition in linear algebra, a matrix is singular when det(A) = 0. A singular matrix cannot be inverted because division by determinant 0 is undefined.'
+      explanation: 'By definition in linear algebra, a matrix is singular when $\\det(A) = 0$. A singular matrix cannot be inverted because division by determinant 0 is undefined.'
     }
   ];
 
@@ -2094,6 +2143,8 @@ function initQuiz() {
 
       qOptionsList.appendChild(btn);
     });
+
+    renderMath(qQuestionCard);
   }
 
   function handleAnswer(selectedIdx, q) {
@@ -2122,6 +2173,7 @@ function initQuiz() {
       ${q.explanation}
     `;
     qFeedbackBox.style.display = 'block';
+    renderMath(qFeedbackBox);
 
     if (currentIdx < questions.length - 1) {
       qNextBtn.textContent = 'Next Question →';

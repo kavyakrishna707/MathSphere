@@ -2084,3 +2084,27 @@ kbd {
     text-align: center;
   }
 }
+
+/* --------------------------------------------------------------------------
+   16. KaTeX Math Notation Styling
+   -------------------------------------------------------------------------- */
+.katex {
+  font-size: 1.05em;
+  color: inherit;
+}
+
+.katex-display {
+  margin: 1.2em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0;
+}
+
+.concept-callout .katex-display {
+  margin: 0.6em 0 0;
+}
+
+.formula-banner .katex {
+  font-size: 1.15em;
+  color: var(--accent-cyan);
+}

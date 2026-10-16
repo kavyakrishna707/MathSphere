@@ -8,6 +8,10 @@
   <meta name="author" content="MathSphere Team">
   <title>MathSphere | Explore Mathematics. Expand Your Mind.</title>
   <link rel="stylesheet" href="style.css">
+  <!-- KaTeX Math Rendering Library -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230b1120' stroke='%2300f0ff' stroke-width='5'/><ellipse cx='50' cy='50' rx='42' ry='16' fill='none' stroke='%238b5cf6' stroke-width='4' transform='rotate(30 50 50)'/><ellipse cx='50' cy='50' rx='42' ry='16' fill='none' stroke='%2300f0ff' stroke-width='4' transform='rotate(-30 50 50)'/><circle cx='50' cy='50' r='10' fill='%2300f0ff'/></svg>">
 </head>
 <body>
@@ -195,7 +199,7 @@
             <div class="tool-card-content">
               <span class="tool-category-badge">Algebra</span>
               <h2 class="tool-card-title">Algebra Solver</h2>
-              <p class="tool-card-desc">Solve linear ($ax + b = c$) and quadratic equations ($ax² + bx + c = 0$) with discriminant analysis, step-by-step working, and complex root support.</p>
+              <p class="tool-card-desc">Solve linear ($ax + b = c$) and quadratic equations ($ax^2 + bx + c = 0$) with discriminant analysis, step-by-step working, and complex root support.</p>
               <a href="#algebra-solver" class="tool-card-link">Solve Equations <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -208,7 +212,7 @@
             <div class="tool-card-content">
               <span class="tool-category-badge">Visuals & Graphing</span>
               <h2 class="tool-card-title">Graph Plotter</h2>
-              <p class="tool-card-desc">Explore mathematical curves on an interactive HTML5 canvas: $y = x$, $y = x²$, $y = x³$, $y = \sin(x)$, $y = \cos(x)$ with dynamic ranges and hover inspection.</p>
+              <p class="tool-card-desc">Explore mathematical curves on an interactive HTML5 canvas: $y = x$, $y = x^2$, $y = x^3$, $y = \sin(x)$, $y = \cos(x)$ with dynamic ranges and hover inspection.</p>
               <a href="#graph-plotter" class="tool-card-link">Plot Curves <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -365,7 +369,7 @@
           <div class="section-pill">Feature C</div>
           <h2 class="section-title">Matrix Calculator</h2>
           <p class="section-desc">
-            Define dimensions up to 4×4 for matrices $A$ and $B$. Perform Matrix Addition ($A + B$), Subtraction ($A - B$), Matrix Multiplication ($A \times B$), Transpose, Determinants ($\det A, \det B$), and Inverses ($A^{-1}, B^{-1}$) with full dimension compatibility checks.
+            Define dimensions up to 4×4 for matrices $A$ and $B$. Perform Matrix Addition ($A + B$), Subtraction ($A - B$), Matrix Multiplication ($A \times B$), Transpose, Determinants ($\det(A), \det(B)$), and Inverses ($A^{-1}, B^{-1}$) with full dimension compatibility checks.
           </p>
         </div>
 
@@ -603,7 +607,7 @@
           <div id="panel-linear" class="solver-panel active" role="tabpanel" aria-labelledby="tab-linear">
             <div class="solver-card">
               <div class="formula-banner">
-                <span class="formula-display">Standard Form: <strong>ax + b = c</strong></span>
+                <span class="formula-display">Standard Form: <strong>$ax + b = c$</strong></span>
               </div>
 
               <form id="linear-form" class="equation-form" onsubmit="return false;">
@@ -641,7 +645,7 @@
           <div id="panel-quadratic" class="solver-panel" role="tabpanel" aria-labelledby="tab-quadratic" style="display:none;">
             <div class="solver-card">
               <div class="formula-banner">
-                <span class="formula-display">Standard Form: <strong>ax² + bx + c = 0</strong> &nbsp;|&nbsp; Formula: <strong>x = (−b ± √(b² − 4ac)) / (2a)</strong></span>
+                <span class="formula-display">Standard Form: <strong>$ax^2 + bx + c = 0$</strong> &nbsp;|&nbsp; Formula: <strong>$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</strong></span>
               </div>
 
               <form id="quadratic-form" class="equation-form" onsubmit="return false;">
@@ -897,17 +901,17 @@
               <div class="concept-callout">
                 <strong>Matrix Multiplication Rule:</strong>
                 <br>To multiply $A \times B$, the number of columns in $A$ must equal the number of rows in $B$.
-                <br>$(m \times k) \cdot (k \times n) \implies (m \times n)$.
+                <br>If $A$ is of size $m \times k$ and $B$ is of size $k \times n$, then the product $AB$ has size $m \times n$.
               </div>
               <ul class="tut-list">
-                <li><strong>Determinant:</strong> A scalar value encoding the volume scaling factor of the transformation. A matrix is <em>singular</em> (non-invertible) if and only if $\det = 0$.</li>
+                <li><strong>Determinant:</strong> A scalar value encoding the volume scaling factor of the transformation. A matrix is <em>singular</em> (non-invertible) if and only if $\det(A) = 0$.</li>
                 <li><strong>2×2 Determinant Formula:</strong> $\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$.</li>
                 <li><strong>2×2 Inverse Formula:</strong> $A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$.</li>
               </ul>
               <div class="worked-example">
                 <strong>Worked Example:</strong> Determinant of $A = \begin{pmatrix} 4 & 2 \\ 1 & 3 \end{pmatrix}$:
                 <br>$\det(A) = (4)(3) - (2)(1) = 12 - 2 = 10 \neq 0$.
-                <br>Since $\det \neq 0$, $A$ is invertible!
+                <br>Since $\det(A) \neq 0$, $A$ is invertible!
               </div>
             </div>
             <div class="tutorial-footer">
