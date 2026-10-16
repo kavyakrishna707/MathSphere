@@ -304,3 +304,5 @@ Using JavaScript's built-in `eval()` function introduces critical code injection
 
 **MathSphere** — *Explore Mathematics. Expand Your Mind.*  
 Built with precision and passion for mathematics education.
+#   M a t h S p h e r e  
+ 
