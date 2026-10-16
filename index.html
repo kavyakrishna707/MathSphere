@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MathSphere - Explore Mathematics. Expand Your Mind. An interactive, all-in-one mathematics educational platform featuring scientific and matrix calculators, algebra solvers, graph plotter, number system converter, and tutorials.">
+  <meta name="keywords" content="mathematics, scientific calculator, matrix calculator, algebra solver, quadratic solver, graph plotter, number system converter, math quiz, math tutorials">
+  <meta name="author" content="MathSphere Team">
+  <title>MathSphere | Explore Mathematics. Expand Your Mind.</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230b1120' stroke='%2300f0ff' stroke-width='5'/><ellipse cx='50' cy='50' rx='42' ry='16' fill='none' stroke='%238b5cf6' stroke-width='4' transform='rotate(30 50 50)'/><ellipse cx='50' cy='50' rx='42' ry='16' fill='none' stroke='%2300f0ff' stroke-width='4' transform='rotate(-30 50 50)'/><circle cx='50' cy='50' r='10' fill='%2300f0ff'/></svg>">
+</head>
+<body>
+  <!-- Skip to Main Content for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="#home" class="brand-logo" aria-label="MathSphere Home">
+        <svg class="logo-icon" viewBox="0 0 100 100" width="38" height="38" aria-hidden="true">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="4" stroke-opacity="0.3"/>
+          <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="url(#electric-grad)" stroke-width="4" transform="rotate(30 50 50)"/>
+          <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="url(#purple-grad)" stroke-width="4" transform="rotate(-30 50 50)"/>
+          <circle cx="50" cy="50" r="11" fill="url(#core-grad)"/>
+          <defs>
+            <linearGradient id="electric-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#3b82f6"/>
+            </linearGradient>
+            <linearGradient id="purple-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+            <radialGradient id="core-grad">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="60%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <span class="brand-name">Math<span class="gradient-text">Sphere</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#scientific-calculator" class="nav-link">Calculator</a></li>
+          <li><a href="#matrix-calculator" class="nav-link">Matrices</a></li>
+          <li><a href="#number-converter" class="nav-link">Number Systems</a></li>
+          <li><a href="#algebra-solver" class="nav-link">Algebra</a></li>
+          <li><a href="#graph-plotter" class="nav-link">Plotter</a></li>
+          <li><a href="#math-quiz" class="nav-link">Quiz</a></li>
+          <li><a href="#learning-hub" class="nav-link">Learning Hub</a></li>
+        </ul>
+      </nav>
+
+      <!-- Theme Switcher & Mobile Menu Button -->
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button id="mobile-menu-btn" class="icon-btn mobile-menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-drawer-header">
+        <span class="brand-name">Math<span class="gradient-text">Sphere</span></span>
+        <button id="mobile-close-btn" class="icon-btn" aria-label="Close mobile menu">✕</button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li><a href="#home" class="mobile-nav-link">Home</a></li>
+        <li><a href="#scientific-calculator" class="mobile-nav-link">Scientific Calculator</a></li>
+        <li><a href="#matrix-calculator" class="mobile-nav-link">Matrix Calculator</a></li>
+        <li><a href="#number-converter" class="mobile-nav-link">Number System Converter</a></li>
+        <li><a href="#algebra-solver" class="mobile-nav-link">Algebra Solver</a></li>
+        <li><a href="#graph-plotter" class="mobile-nav-link">Graph Plotter</a></li>
+        <li><a href="#math-quiz" class="mobile-nav-link">Interactive Quiz</a></li>
+        <li><a href="#learning-hub" class="mobile-nav-link">Learning Hub & Tutorials</a></li>
+      </ul>
+    </div>
+    <div id="mobile-nav-backdrop" class="mobile-nav-backdrop" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <!-- SECTION A: HERO & HOME -->
+    <section id="home" class="hero-section">
+      <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <span class="badge-dot"></span> Interactive Mathematics Learning  Platform 
+        </div>
+        <h1 class="hero-title">
+          Explore Mathematics.<br>
+          <span class="gradient-text">Expand Your Mind.</span>
+        </h1>
+        <p class="hero-subtitle">
+          MathSphere is an interactive platform that transforms the way you learn, explore, and experience mathematics. Discover powerful tools for scientific calculations, matrix operations, equation solving, and function graphing all in one place.
+
+
+        </p>
+
+        <!-- Search and Filter Bar -->
+        <div class="search-filter-wrapper">
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="tool-search-input" placeholder="Search math tools, topics, formulas..." aria-label="Search tools and topics">
+            <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" title="Clear">✕</button>
+          </div>
+
+          <div class="filter-pills" role="tablist" aria-label="Filter tools by category">
+            <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">All Tools (7)</button>
+            <button class="filter-pill" data-filter="calc" role="tab" aria-selected="false">Calculators</button>
+            <button class="filter-pill" data-filter="algebra" role="tab" aria-selected="false">Algebra & Matrices</button>
+            <button class="filter-pill" data-filter="converter" role="tab" aria-selected="false">Number Systems</button>
+            <button class="filter-pill" data-filter="visual" role="tab" aria-selected="false">Visuals & Graphing</button>
+            <button class="filter-pill" data-filter="edu" role="tab" aria-selected="false">Learning & Quiz</button>
+          </div>
+        </div>
+
+        <!-- Tool Cards Showcase Grid -->
+        <div class="tools-grid" id="tools-showcase-grid">
+          <!-- Card 1: Scientific Calculator -->
+          <article class="tool-card" data-category="calc" data-keywords="calculator scientific trigonometry sin cos tan logarithm sqrt powers parentheses">
+            <div class="tool-card-icon calc-accent">
+              <span class="math-glyph">f(x)</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Calculator</span>
+              <h2 class="tool-card-title">Scientific Calculator</h2>
+              <p class="tool-card-desc">High-precision arithmetic, trigonometric functions in DEG/RAD, powers, logarithms, and clean keyboard support with a safe custom AST parser.</p>
+              <a href="#scientific-calculator" class="tool-card-link">Launch Calculator <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 2: Matrix Calculator -->
+          <article class="tool-card" data-category="algebra" data-keywords="matrix matrices linear algebra determinant inverse transpose multiplication addition singular">
+            <div class="tool-card-icon matrix-accent">
+              <span class="math-glyph">[A]</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Linear Algebra</span>
+              <h2 class="tool-card-title">Matrix Calculator</h2>
+              <p class="tool-card-desc">Perform addition, subtraction, matrix multiplication, transpose, determinants, and matrix inverses with dimension compatibility verification.</p>
+              <a href="#matrix-calculator" class="tool-card-link">Launch Matrix Tool <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 3: Number System Converter -->
+          <article class="tool-card" data-category="converter" data-keywords="number system converter binary octal decimal hexadecimal base conversion radix">
+            <div class="tool-card-icon base-accent">
+              <span class="math-glyph">0b10</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Number Systems</span>
+              <h2 class="tool-card-title">Number Converter</h2>
+              <p class="tool-card-desc">Bi-directional conversion between Binary (base 2), Octal (base 8), Decimal (base 10), and Hexadecimal (base 16) with step-by-step math breakdowns.</p>
+              <a href="#number-converter" class="tool-card-link">Convert Bases <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 4: Algebra Solver -->
+          <article class="tool-card" data-category="algebra" data-keywords="algebra solver linear quadratic equation roots discriminant complex roots formula ax2+bx+c">
+            <div class="tool-card-icon algebra-accent">
+              <span class="math-glyph">ax²</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Algebra</span>
+              <h2 class="tool-card-title">Algebra Solver</h2>
+              <p class="tool-card-desc">Solve linear ($ax + b = c$) and quadratic equations ($ax² + bx + c = 0$) with discriminant analysis, step-by-step working, and complex root support.</p>
+              <a href="#algebra-solver" class="tool-card-link">Solve Equations <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 5: Graph Plotter -->
+          <article class="tool-card" data-category="visual" data-keywords="graph plotter canvas coordinate plane function plot sin cos x2 x3 curves grid">
+            <div class="tool-card-icon graph-accent">
+              <span class="math-glyph">📈</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Visuals & Graphing</span>
+              <h2 class="tool-card-title">Graph Plotter</h2>
+              <p class="tool-card-desc">Explore mathematical curves on an interactive HTML5 canvas: $y = x$, $y = x²$, $y = x³$, $y = \sin(x)$, $y = \cos(x)$ with dynamic ranges and hover inspection.</p>
+              <a href="#graph-plotter" class="tool-card-link">Plot Curves <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 6: Math Quiz -->
+          <article class="tool-card" data-category="edu" data-keywords="quiz test practice arithmetic algebra matrices number systems multiple choice score feedback">
+            <div class="tool-card-icon quiz-accent">
+              <span class="math-glyph">🎯</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Practice & Assessment</span>
+              <h2 class="tool-card-title">Interactive Math Quiz</h2>
+              <p class="tool-card-desc">Test and reinforce your knowledge across arithmetic, algebra, linear systems, and binary arithmetic with instant explanations and scored feedback.</p>
+              <a href="#math-quiz" class="tool-card-link">Take the Quiz <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Card 7: Learning Hub -->
+          <article class="tool-card" data-category="edu" data-keywords="learning hub tutorials theory trigonometry matrices algebra number systems guide worked examples">
+            <div class="tool-card-icon hub-accent">
+              <span class="math-glyph">📚</span>
+            </div>
+            <div class="tool-card-content">
+              <span class="tool-category-badge">Tutorials</span>
+              <h2 class="tool-card-title">Educational Learning Hub</h2>
+              <p class="tool-card-desc">Comprehensive conceptual guides, core formulas, worked examples, and direct links to apply theory inside our interactive calculators.</p>
+              <a href="#learning-hub" class="tool-card-link">Start Learning <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION B: SCIENTIFIC CALCULATOR -->
+    <section id="scientific-calculator" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature B</div>
+          <h2 class="section-title">Scientific Calculator</h2>
+          <p class="section-desc">
+            A safe, tokenized mathematical expression engine. Evaluates complex arithmetic, power operations, parentheses nesting, square roots, logarithms, and trigonometry without using JavaScript <code class="code-tag">eval()</code>.
+          </p>
+        </div>
+
+        <div class="calc-layout">
+          <!-- Main Calculator Card -->
+          <div class="calc-card">
+            <!-- Screen Display -->
+            <div class="calc-display-container">
+              <div class="calc-mode-indicator">
+                <span id="calc-angle-mode-badge" class="mode-tag">DEG</span>
+                <span id="calc-memory-indicator" class="mode-tag" style="display:none;">M</span>
+              </div>
+              <div id="calc-expression-display" class="calc-expression" aria-label="Calculation expression">0</div>
+              <div id="calc-result-display" class="calc-result" aria-live="polite" aria-label="Calculation result">0</div>
+            </div>
+
+            <!-- Mode & Quick Controls -->
+            <div class="calc-control-bar">
+              <button id="calc-angle-toggle" class="calc-pill-btn" aria-label="Toggle Angle Unit: Degrees or Radians">
+                Mode: <strong id="calc-angle-text">DEG</strong>
+              </button>
+              <button id="calc-copy-btn" class="calc-pill-btn" title="Copy result to clipboard" aria-label="Copy result">
+                📋 Copy
+              </button>
+              <button id="calc-clear-history-btn" class="calc-pill-btn" title="Clear calculation history" aria-label="Clear history">
+                🗑️ Clear History
+              </button>
+            </div>
+
+            <!-- Keypad Grid -->
+            <div class="calc-keypad" role="group" aria-label="Scientific Calculator Keypad">
+              <!-- Row 1: Memory & Clear Controls -->
+              <button class="calc-key fn-key" data-action="all-clear" aria-label="All Clear">AC</button>
+              <button class="calc-key fn-key" data-action="clear-entry" aria-label="Clear Entry">C</button>
+              <button class="calc-key fn-key" data-action="backspace" aria-label="Backspace / Delete">⌫</button>
+              <button class="calc-key op-key" data-action="insert" data-value="/" aria-label="Divide">÷</button>
+
+              <!-- Row 2: Secondary Functions -->
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="sin(" aria-label="Sine">sin</button>
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="cos(" aria-label="Cosine">cos</button>
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="tan(" aria-label="Tangent">tan</button>
+              <button class="calc-key op-key" data-action="insert" data-value="*" aria-label="Multiply">×</button>
+
+              <!-- Row 3: Logarithms & Roots -->
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="ln(" aria-label="Natural Logarithm">ln</button>
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="log(" aria-label="Base 10 Logarithm">log</button>
+              <button class="calc-key fn-key" data-action="insert-fn" data-value="sqrt(" aria-label="Square Root">√</button>
+              <button class="calc-key op-key" data-action="insert" data-value="-" aria-label="Minus">−</button>
+
+              <!-- Row 4: Powers & Numbers 7, 8, 9 -->
+              <button class="calc-key fn-key" data-action="insert" data-value="^" aria-label="Power">xʸ</button>
+              <button class="calc-key num-key" data-action="insert" data-value="7">7</button>
+              <button class="calc-key num-key" data-action="insert" data-value="8">8</button>
+              <button class="calc-key num-key" data-action="insert" data-value="9">9</button>
+              <button class="calc-key op-key" data-action="insert" data-value="+" aria-label="Plus">+</button>
+
+              <!-- Row 5: Parentheses & Numbers 4, 5, 6 -->
+              <button class="calc-key fn-key" data-action="insert" data-value="(" aria-label="Open parenthesis">(</button>
+              <button class="calc-key num-key" data-action="insert" data-value="4">4</button>
+              <button class="calc-key num-key" data-action="insert" data-value="5">5</button>
+              <button class="calc-key num-key" data-action="insert" data-value="6">6</button>
+              <button class="calc-key op-key" data-action="insert" data-value="%" aria-label="Percent or Modulo">%</button>
+
+              <!-- Row 6: Parentheses & Numbers 1, 2, 3 -->
+              <button class="calc-key fn-key" data-action="insert" data-value=")" aria-label="Close parenthesis">)</button>
+              <button class="calc-key num-key" data-action="insert" data-value="1">1</button>
+              <button class="calc-key num-key" data-action="insert" data-value="2">2</button>
+              <button class="calc-key num-key" data-action="insert" data-value="3">3</button>
+              <button class="calc-key fn-key" data-action="insert" data-value="pi" aria-label="Pi constant">π</button>
+
+              <!-- Row 7: Negation, Zero, Decimal, Constants, Equals -->
+              <button class="calc-key fn-key" data-action="negate" aria-label="Toggle Positive/Negative">±</button>
+              <button class="calc-key num-key" data-action="insert" data-value="0">0</button>
+              <button class="calc-key num-key" data-action="insert" data-value=".">.</button>
+              <button class="calc-key fn-key" data-action="insert" data-value="e" aria-label="Euler constant e">e</button>
+              <button class="calc-key equals-key" data-action="calculate" aria-label="Equals / Evaluate">=</button>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="calc-error-banner" class="alert-banner alert-error" style="display:none;" role="alert"></div>
+          </div>
+
+          <!-- History & Features Sidebar -->
+          <div class="calc-sidebar">
+            <div class="info-card">
+              <h3 class="info-card-title">Calculation Tape & History</h3>
+              <p class="text-muted text-sm">Click any past calculation to restore its value or expression.</p>
+              <div id="calc-history-list" class="history-list">
+                <div class="history-empty">No calculations yet. Perform an operation to see history.</div>
+              </div>
+            </div>
+
+            <div class="info-card guide-box">
+              <h4 class="guide-title">Keyboard Shortcuts</h4>
+              <ul class="shortcut-list">
+                <li><kbd>0</kbd>–<kbd>9</kbd>, <kbd>.</kbd> : Input digits</li>
+                <li><kbd>+</kbd>, <kbd>-</kbd>, <kbd>*</kbd>, <kbd>/</kbd>, <kbd>^</kbd> : Operators</li>
+                <li><kbd>Enter</kbd> or <kbd>=</kbd> : Calculate</li>
+                <li><kbd>Backspace</kbd> : Delete character</li>
+                <li><kbd>Escape</kbd> : Clear entry / All Clear</li>
+                <li><kbd>(</kbd>, <kbd>)</kbd> : Grouping parentheses</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION C: MATRIX CALCULATOR -->
+    <section id="matrix-calculator" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature C</div>
+          <h2 class="section-title">Matrix Calculator</h2>
+          <p class="section-desc">
+            Define dimensions up to 4×4 for matrices $A$ and $B$. Perform Matrix Addition ($A + B$), Subtraction ($A - B$), Matrix Multiplication ($A \times B$), Transpose, Determinants ($\det A, \det B$), and Inverses ($A^{-1}, B^{-1}$) with full dimension compatibility checks.
+          </p>
+        </div>
+
+        <!-- Presets Bar -->
+        <div class="matrix-presets-bar">
+          <span class="preset-label">Quick Presets:</span>
+          <button class="btn-sm btn-outline" data-matrix-preset="identity2">2×2 Identity</button>
+          <button class="btn-sm btn-outline" data-matrix-preset="identity3">3×3 Identity</button>
+          <button class="btn-sm btn-outline" data-matrix-preset="system2">2×2 System</button>
+          <button class="btn-sm btn-outline" data-matrix-preset="system3">3×3 System</button>
+          <button class="btn-sm btn-outline" data-matrix-preset="random">Random Integers</button>
+          <button class="btn-sm btn-outline" data-matrix-preset="clear">Clear Values</button>
+        </div>
+
+        <!-- Matrix Input Containers -->
+        <div class="matrix-inputs-wrapper">
+          <!-- Matrix A Panel -->
+          <div class="matrix-panel" id="matrix-a-panel">
+            <div class="matrix-panel-header">
+              <h3 class="matrix-title">Matrix A</h3>
+              <div class="matrix-dimension-selectors">
+                <label for="matrix-a-rows">Rows:</label>
+                <select id="matrix-a-rows" class="matrix-dim-select" aria-label="Matrix A rows">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+                <span class="dim-times">×</span>
+                <label for="matrix-a-cols">Cols:</label>
+                <select id="matrix-a-cols" class="matrix-dim-select" aria-label="Matrix A columns">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grid container where cell inputs are generated -->
+            <div id="matrix-a-grid" class="matrix-grid-container" role="grid" aria-label="Matrix A Input Values"></div>
+
+            <div class="matrix-actions-row">
+              <button id="btn-transpose-a" class="btn-sm btn-secondary" title="Transpose Matrix A">Transpose Aᵀ</button>
+              <button id="btn-det-a" class="btn-sm btn-secondary" title="Calculate Determinant of A">det(A)</button>
+              <button id="btn-inv-a" class="btn-sm btn-secondary" title="Calculate Inverse of A">A⁻¹ (Inverse)</button>
+            </div>
+          </div>
+
+          <!-- Operation Buttons Column -->
+          <div class="matrix-operations-column">
+            <div class="operation-pill-label">Binary Operations</div>
+            <button id="btn-matrix-add" class="btn-op" title="Add Matrix A and B">A + B</button>
+            <button id="btn-matrix-sub" class="btn-op" title="Subtract Matrix B from A">A − B</button>
+            <button id="btn-matrix-mul" class="btn-op btn-op-accent" title="Multiply Matrix A by Matrix B">A × B</button>
+            <button id="btn-matrix-swap" class="btn-op btn-sm" title="Swap values of Matrix A and Matrix B">⇄ Swap A & B</button>
+          </div>
+
+          <!-- Matrix B Panel -->
+          <div class="matrix-panel" id="matrix-b-panel">
+            <div class="matrix-panel-header">
+              <h3 class="matrix-title">Matrix B</h3>
+              <div class="matrix-dimension-selectors">
+                <label for="matrix-b-rows">Rows:</label>
+                <select id="matrix-b-rows" class="matrix-dim-select" aria-label="Matrix B rows">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+                <span class="dim-times">×</span>
+                <label for="matrix-b-cols">Cols:</label>
+                <select id="matrix-b-cols" class="matrix-dim-select" aria-label="Matrix B columns">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grid container where cell inputs are generated -->
+            <div id="matrix-b-grid" class="matrix-grid-container" role="grid" aria-label="Matrix B Input Values"></div>
+
+            <div class="matrix-actions-row">
+              <button id="btn-transpose-b" class="btn-sm btn-secondary" title="Transpose Matrix B">Transpose Bᵀ</button>
+              <button id="btn-det-b" class="btn-sm btn-secondary" title="Calculate Determinant of B">det(B)</button>
+              <button id="btn-inv-b" class="btn-sm btn-secondary" title="Calculate Inverse of B">B⁻¹ (Inverse)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matrix Result & Educational Explanation Area -->
+        <div id="matrix-result-container" class="matrix-result-box" style="display:none;" aria-live="polite">
+          <div class="result-header">
+            <h4 id="matrix-result-title" class="result-title">Result Matrix</h4>
+            <button id="matrix-copy-result" class="btn-sm btn-outline">Copy Matrix Values</button>
+          </div>
+          <div id="matrix-result-content" class="matrix-result-content"></div>
+          <div id="matrix-explanation-box" class="matrix-explanation-callout"></div>
+        </div>
+
+        <!-- Matrix Error Banner -->
+        <div id="matrix-error-banner" class="alert-banner alert-error" style="display:none;" role="alert"></div>
+      </div>
+    </section>
+
+    <!-- SECTION D: NUMBER SYSTEM CONVERTER -->
+    <section id="number-converter" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature D</div>
+          <h2 class="section-title">Number System Converter</h2>
+          <p class="section-desc">
+            Explore and convert numbers seamlessly across Binary (Base 2), Octal (Base 8), Decimal (Base 10), and Hexadecimal (Base 16). Features strict character validation per radix and complete step-by-step conversion working.
+          </p>
+        </div>
+
+        <div class="converter-layout">
+          <!-- Active Conversion Card -->
+          <div class="converter-card">
+            <!-- Decimal Input -->
+            <div class="conv-field-group">
+              <div class="conv-field-header">
+                <label for="conv-dec-input" class="conv-label">
+                  <span class="base-badge base-10">DEC</span> Decimal (Base 10)
+                </label>
+                <span class="valid-chars-hint">Valid digits: 0-9</span>
+              </div>
+              <div class="conv-input-wrapper">
+                <input type="text" id="conv-dec-input" class="conv-input" placeholder="e.g. 255" autocomplete="off" spellcheck="false">
+                <button class="conv-copy-btn" data-target="conv-dec-input" title="Copy Decimal" aria-label="Copy Decimal">📋</button>
+              </div>
+            </div>
+
+            <!-- Binary Input -->
+            <div class="conv-field-group">
+              <div class="conv-field-header">
+                <label for="conv-bin-input" class="conv-label">
+                  <span class="base-badge base-2">BIN</span> Binary (Base 2)
+                </label>
+                <span class="valid-chars-hint">Valid bits: 0, 1</span>
+              </div>
+              <div class="conv-input-wrapper">
+                <input type="text" id="conv-bin-input" class="conv-input" placeholder="e.g. 11111111" autocomplete="off" spellcheck="false">
+                <button class="conv-copy-btn" data-target="conv-bin-input" title="Copy Binary" aria-label="Copy Binary">📋</button>
+              </div>
+            </div>
+
+            <!-- Octal Input -->
+            <div class="conv-field-group">
+              <div class="conv-field-header">
+                <label for="conv-oct-input" class="conv-label">
+                  <span class="base-badge base-8">OCT</span> Octal (Base 8)
+                </label>
+                <span class="valid-chars-hint">Valid digits: 0-7</span>
+              </div>
+              <div class="conv-input-wrapper">
+                <input type="text" id="conv-oct-input" class="conv-input" placeholder="e.g. 377" autocomplete="off" spellcheck="false">
+                <button class="conv-copy-btn" data-target="conv-oct-input" title="Copy Octal" aria-label="Copy Octal">📋</button>
+              </div>
+            </div>
+
+            <!-- Hexadecimal Input -->
+            <div class="conv-field-group">
+              <div class="conv-field-header">
+                <label for="conv-hex-input" class="conv-label">
+                  <span class="base-badge base-16">HEX</span> Hexadecimal (Base 16)
+                </label>
+                <span class="valid-chars-hint">Valid characters: 0-9, A-F</span>
+              </div>
+              <div class="conv-input-wrapper">
+                <input type="text" id="conv-hex-input" class="conv-input" placeholder="e.g. FF" autocomplete="off" spellcheck="false">
+                <button class="conv-copy-btn" data-target="conv-hex-input" title="Copy Hexadecimal" aria-label="Copy Hexadecimal">📋</button>
+              </div>
+            </div>
+
+            <!-- Validation Feedback Banner -->
+            <div id="conv-validation-msg" class="alert-banner alert-warning" style="display:none;" role="alert"></div>
+
+            <div class="conv-controls-row">
+              <button id="conv-clear-btn" class="btn-sm btn-secondary">Clear All Fields</button>
+              <div class="sample-values">
+                <span class="text-sm text-muted">Try sample:</span>
+                <button class="btn-sm btn-outline sample-btn" data-val="42">42</button>
+                <button class="btn-sm btn-outline sample-btn" data-val="128">128</button>
+                <button class="btn-sm btn-outline sample-btn" data-val="255">255</button>
+                <button class="btn-sm btn-outline sample-btn" data-val="1024">1024</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Educational Breakdown -->
+          <div class="converter-steps-card">
+            <h3 class="steps-card-title">Mathematical Step-by-Step Breakdown</h3>
+            <p class="text-muted text-sm">See how the conversion works algebraically through repeated division or positional expansion.</p>
+            
+            <div class="steps-tab-nav" role="tablist">
+              <button class="steps-tab active" data-step-view="dec-to-bin" role="tab" aria-selected="true">Dec → Bin</button>
+              <button class="steps-tab" data-step-view="dec-to-hex" role="tab" aria-selected="false">Dec → Hex</button>
+              <button class="steps-tab" data-step-view="dec-to-oct" role="tab" aria-selected="false">Dec → Oct</button>
+              <button class="steps-tab" data-step-view="bin-to-dec" role="tab" aria-selected="false">Bin → Dec</button>
+            </div>
+
+            <div id="conv-steps-output" class="steps-content-box" aria-live="polite">
+              <div class="steps-placeholder">Enter a number in any field above to see mathematical conversion steps.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION E: ALGEBRA SOLVER -->
+    <section id="algebra-solver" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature E</div>
+          <h2 class="section-title">Algebra Solver</h2>
+          <p class="section-desc">
+            Solve linear equations ($ax + b = c$) and quadratic equations ($ax² + bx + c = 0$). Includes detailed calculation steps, discriminant analysis, vertex coordinates, and complex conjugate roots ($u \pm vi$).
+          </p>
+        </div>
+
+        <div class="solver-tabs-container">
+          <div class="solver-tabs" role="tablist">
+            <button id="tab-linear" class="solver-tab active" role="tab" aria-selected="true" aria-controls="panel-linear">
+              Linear Equations (ax + b = c)
+            </button>
+            <button id="tab-quadratic" class="solver-tab" role="tab" aria-selected="false" aria-controls="panel-quadratic">
+              Quadratic Equations (ax² + bx + c = 0)
+            </button>
+          </div>
+
+          <!-- Linear Panel -->
+          <div id="panel-linear" class="solver-panel active" role="tabpanel" aria-labelledby="tab-linear">
+            <div class="solver-card">
+              <div class="formula-banner">
+                <span class="formula-display">Standard Form: <strong>ax + b = c</strong></span>
+              </div>
+
+              <form id="linear-form" class="equation-form" onsubmit="return false;">
+                <div class="inputs-inline-row">
+                  <div class="input-coeff-group">
+                    <label for="lin-a">Coefficient a:</label>
+                    <input type="number" id="lin-a" step="any" value="3" required>
+                  </div>
+                  <span class="eq-symbol">x +</span>
+                  <div class="input-coeff-group">
+                    <label for="lin-b">Constant b:</label>
+                    <input type="number" id="lin-b" step="any" value="7" required>
+                  </div>
+                  <span class="eq-symbol">=</span>
+                  <div class="input-coeff-group">
+                    <label for="lin-c">Constant c:</label>
+                    <input type="number" id="lin-c" step="any" value="19" required>
+                  </div>
+                </div>
+
+                <div class="solver-btn-row">
+                  <button type="button" id="btn-solve-linear" class="btn-primary">Solve Linear Equation</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-linear="3,7,19">Default (3x+7=19)</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-linear="0,5,5">Infinite (0x+5=5)</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-linear="0,4,9">No Solution (0x+4=9)</button>
+                </div>
+              </form>
+
+              <!-- Solution Output -->
+              <div id="linear-solution-output" class="solution-output-box" style="display:none;" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Quadratic Panel -->
+          <div id="panel-quadratic" class="solver-panel" role="tabpanel" aria-labelledby="tab-quadratic" style="display:none;">
+            <div class="solver-card">
+              <div class="formula-banner">
+                <span class="formula-display">Standard Form: <strong>ax² + bx + c = 0</strong> &nbsp;|&nbsp; Formula: <strong>x = (−b ± √(b² − 4ac)) / (2a)</strong></span>
+              </div>
+
+              <form id="quadratic-form" class="equation-form" onsubmit="return false;">
+                <div class="inputs-inline-row">
+                  <div class="input-coeff-group">
+                    <label for="quad-a">Coefficient a:</label>
+                    <input type="number" id="quad-a" step="any" value="1" required>
+                  </div>
+                  <span class="eq-symbol">x² +</span>
+                  <div class="input-coeff-group">
+                    <label for="quad-b">Coefficient b:</label>
+                    <input type="number" id="quad-b" step="any" value="-5" required>
+                  </div>
+                  <span class="eq-symbol">x +</span>
+                  <div class="input-coeff-group">
+                    <label for="quad-c">Constant c:</label>
+                    <input type="number" id="quad-c" step="any" value="6" required>
+                  </div>
+                  <span class="eq-symbol">= 0</span>
+                </div>
+
+                <div class="solver-btn-row">
+                  <button type="button" id="btn-solve-quadratic" class="btn-primary">Solve Quadratic Equation</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-quad="1,-5,6">Two Real Roots (x²-5x+6)</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-quad="1,-4,4">Repeated Root (x²-4x+4)</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-quad="1,2,5">Complex Roots (x²+2x+5)</button>
+                  <button type="button" class="btn-sm btn-outline" data-load-quad="0,2,-8">Linear Case (a=0)</button>
+                </div>
+              </form>
+
+              <!-- Solution Output -->
+              <div id="quadratic-solution-output" class="solution-output-box" style="display:none;" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION F: GRAPH PLOTTER -->
+    <section id="graph-plotter" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature F</div>
+          <h2 class="section-title">Interactive Graph Plotter</h2>
+          <p class="section-desc">
+            Render mathematical functions on an interactive HTML5 canvas. Choose built-in curves or custom expressions, adjust X/Y ranges, inspect grid intersections, and hover to view precise coordinate pairs $(x, y)$.
+          </p>
+        </div>
+
+        <div class="plotter-layout">
+          <!-- Controls Column -->
+          <div class="plotter-controls-card">
+            <h3 class="controls-card-title">Function & Range Settings</h3>
+
+            <!-- Preset Function Selector -->
+            <div class="control-group">
+              <label for="plot-preset-select" class="control-label">Standard Presets:</label>
+              <select id="plot-preset-select" class="form-select">
+                <option value="x">Linear: y = x</option>
+                <option value="x^2" selected>Parabola: y = x²</option>
+                <option value="x^3">Cubic: y = x³</option>
+                <option value="sin(x)">Trig Wave: y = sin(x)</option>
+                <option value="cos(x)">Trig Wave: y = cos(x)</option>
+                <option value="custom">Custom Expression</option>
+              </select>
+            </div>
+
+            <!-- Custom Function Expression Input -->
+            <div id="custom-function-wrapper" class="control-group" style="display:none;">
+              <label for="custom-func-input" class="control-label">f(x) =</label>
+              <input type="text" id="custom-func-input" class="form-input" placeholder="e.g. 2*sin(x) or x^2 - 4">
+              <span class="text-xs text-muted">Supports +, -, *, /, ^, sin(), cos(), tan(), sqrt(), abs()</span>
+            </div>
+
+            <!-- Range Bounds -->
+            <div class="range-bounds-group">
+              <div class="range-row">
+                <div class="range-input-item">
+                  <label for="plot-xmin">X Min:</label>
+                  <input type="number" id="plot-xmin" value="-10" step="1">
+                </div>
+                <div class="range-input-item">
+                  <label for="plot-xmax">X Max:</label>
+                  <input type="number" id="plot-xmax" value="10" step="1">
+                </div>
+              </div>
+
+              <div class="range-row">
+                <div class="range-input-item">
+                  <label for="plot-ymin">Y Min:</label>
+                  <input type="number" id="plot-ymin" value="-10" step="1">
+                </div>
+                <div class="range-input-item">
+                  <label for="plot-ymax">Y Max:</label>
+                  <input type="number" id="plot-ymax" value="10" step="1">
+                </div>
+              </div>
+            </div>
+
+            <!-- Preset Range Shortcuts -->
+            <div class="control-group">
+              <span class="control-label">Preset Ranges:</span>
+              <div class="range-shortcuts-row">
+                <button class="btn-sm btn-outline range-preset-btn" data-xmin="-10" data-xmax="10" data-ymin="-10" data-ymax="10">Standard (-10..10)</button>
+                <button class="btn-sm btn-outline range-preset-btn" data-xmin="-6.28" data-xmax="6.28" data-ymin="-2" data-ymax="2">Trig (-2π..2π)</button>
+                <button class="btn-sm btn-outline range-preset-btn" data-xmin="-5" data-xmax="5" data-ymin="-5" data-ymax="5">Zoom In (±5)</button>
+                <button class="btn-sm btn-outline range-preset-btn" data-xmin="-20" data-xmax="20" data-ymin="-20" data-ymax="20">Zoom Out (±20)</button>
+              </div>
+            </div>
+
+            <!-- Render Button & Extra Controls -->
+            <div class="plotter-btn-stack">
+              <button id="btn-draw-graph" class="btn-primary w-full">Update Plot</button>
+              <button id="btn-reset-graph" class="btn-sm btn-secondary w-full">Reset to Defaults</button>
+            </div>
+
+            <!-- Plot Coordinates Hover Tag -->
+            <div class="hover-coords-badge" id="hover-coords-display">
+              Hover over canvas to track coordinates
+            </div>
+          </div>
+
+          <!-- Canvas Column -->
+          <div class="plotter-canvas-container">
+            <div class="canvas-header-info">
+              <span id="canvas-function-label" class="function-indicator">y = x²</span>
+              <div class="canvas-action-btns">
+                <button id="btn-download-canvas" class="btn-sm btn-outline" title="Export as PNG image">📸 Export PNG</button>
+              </div>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="math-canvas" width="700" height="500" aria-label="Mathematical Function Graph" role="img"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION G: MATH QUIZ -->
+    <section id="math-quiz" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature G</div>
+          <h2 class="section-title">Interactive Math Quiz</h2>
+          <p class="section-desc">
+            Challenge your mathematical understanding across Arithmetic, Algebra, Matrix Operations, and Number Systems. Receive instant feedback, step-by-step explanations, and a comprehensive score report upon completion.
+          </p>
+        </div>
+
+        <div class="quiz-container">
+          <!-- Quiz Progress Header -->
+          <div class="quiz-header-card">
+            <div class="quiz-meta-row">
+              <span id="quiz-question-counter" class="quiz-progress-text">Question 1 of 10</span>
+              <span id="quiz-category-tag" class="badge-dot-cat">Arithmetic</span>
+              <span id="quiz-score-tracker" class="quiz-score-badge">Score: 0 / 0</span>
+            </div>
+            <div class="quiz-progress-track" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+              <div id="quiz-progress-fill" class="quiz-progress-bar" style="width: 10%;"></div>
+            </div>
+          </div>
+
+          <!-- Active Question Card -->
+          <div id="quiz-question-box" class="quiz-card" aria-live="polite">
+            <h3 id="quiz-question-text" class="quiz-question-title">Loading question...</h3>
+            <div id="quiz-options-list" class="quiz-options-grid" role="radiogroup" aria-label="Question answer options"></div>
+            
+            <!-- Immediate feedback after selecting an option -->
+            <div id="quiz-explanation-box" class="quiz-feedback-box" style="display:none;"></div>
+
+            <div class="quiz-nav-row">
+              <button id="quiz-next-btn" class="btn-primary" style="display:none;">Next Question →</button>
+            </div>
+          </div>
+
+          <!-- Quiz Completion Results Card -->
+          <div id="quiz-results-box" class="quiz-results-card" style="display:none;" aria-live="polite">
+            <div class="results-trophy-icon">🏆</div>
+            <h3 class="results-title">Quiz Completed!</h3>
+            <p id="quiz-final-message" class="results-subtitle">Great effort! Here is your performance overview:</p>
+            
+            <div class="results-score-circle">
+              <span id="quiz-final-percentage" class="score-number">100%</span>
+              <span id="quiz-final-fraction" class="score-ratio">10 / 10 Correct</span>
+            </div>
+
+            <div id="quiz-breakdown-container" class="results-breakdown-list"></div>
+
+            <div class="results-actions">
+              <button id="quiz-restart-btn" class="btn-primary">Restart Quiz ↻</button>
+              <a href="#learning-hub" class="btn-secondary">Review Tutorials 📚</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION H: LEARNING HUB -->
+    <section id="learning-hub" class="tool-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill">Feature H</div>
+          <h2 class="section-title">Educational Learning Hub</h2>
+          <p class="section-desc">
+            Deepen your conceptual foundation with structured tutorials on Number Systems, Matrix Algebra, Equations, and Trigonometry. Each guide features clear intuition, core formulas, worked examples, and quick links to practice inside our tools.
+          </p>
+        </div>
+
+        <div class="learning-hub-grid">
+          <!-- Tutorial 1: Number Systems -->
+          <article class="tutorial-card">
+            <div class="tutorial-card-header">
+              <span class="tut-icon">🔢</span>
+              <h3 class="tutorial-title">1. Number Systems & Binary Math</h3>
+            </div>
+            <div class="tutorial-body">
+              <p>
+                A <strong>numeral system</strong> expresses numbers using a consistent base (radix). Modern computing relies heavily on base 2 (Binary) and base 16 (Hexadecimal) due to electronic transistor states.
+              </p>
+              <div class="concept-callout">
+                <strong>Positional Notation:</strong>
+                $$\text{Value} = \sum_{i=0}^{n} d_i \times \text{base}^i$$
+              </div>
+              <ul class="tut-list">
+                <li><strong>Binary (Base 2):</strong> Uses bits 0 and 1. Weights: $2^0=1, 2^1=2, 2^2=4, 2^3=8$.</li>
+                <li><strong>Hexadecimal (Base 16):</strong> Uses 0-9 and A-F (where A=10, B=11, C=12, D=13, E=14, F=15). Each hex digit matches exactly 4 binary bits (a nibble).</li>
+              </ul>
+              <div class="worked-example">
+                <strong>Worked Example:</strong> Convert Decimal 25 to Binary:
+                <br>• $25 \div 2 = 12 \text{ R } 1$
+                <br>• $12 \div 2 = 6 \text{ R } 0$
+                <br>• $6 \div 2 = 3 \text{ R } 0$
+                <br>• $3 \div 2 = 1 \text{ R } 1$
+                <br>• $1 \div 2 = 0 \text{ R } 1$
+                <br>Reading remainders from bottom to top: <strong>(25)₁₀ = (11001)₂</strong>.
+              </div>
+            </div>
+            <div class="tutorial-footer">
+              <a href="#number-converter" class="btn-sm btn-outline">Practice in Converter →</a>
+            </div>
+          </article>
+
+          <!-- Tutorial 2: Matrix Algebra -->
+          <article class="tutorial-card">
+            <div class="tutorial-card-header">
+              <span class="tut-icon">📐</span>
+              <h3 class="tutorial-title">2. Matrices & Linear Transformations</h3>
+            </div>
+            <div class="tutorial-body">
+              <p>
+                A <strong>matrix</strong> is a rectangular array of numbers arranged in rows and columns. Matrices model linear transformations, solve simultaneous equation systems, and power 3D graphics.
+              </p>
+              <div class="concept-callout">
+                <strong>Matrix Multiplication Rule:</strong>
+                <br>To multiply $A \times B$, the number of columns in $A$ must equal the number of rows in $B$.
+                <br>$(m \times k) \cdot (k \times n) \implies (m \times n)$.
+              </div>
+              <ul class="tut-list">
+                <li><strong>Determinant:</strong> A scalar value encoding the volume scaling factor of the transformation. A matrix is <em>singular</em> (non-invertible) if and only if $\det = 0$.</li>
+                <li><strong>2×2 Determinant Formula:</strong> $\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$.</li>
+                <li><strong>2×2 Inverse Formula:</strong> $A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$.</li>
+              </ul>
+              <div class="worked-example">
+                <strong>Worked Example:</strong> Determinant of $A = \begin{pmatrix} 4 & 2 \\ 1 & 3 \end{pmatrix}$:
+                <br>$\det(A) = (4)(3) - (2)(1) = 12 - 2 = 10 \neq 0$.
+                <br>Since $\det \neq 0$, $A$ is invertible!
+              </div>
+            </div>
+            <div class="tutorial-footer">
+              <a href="#matrix-calculator" class="btn-sm btn-outline">Practice in Matrix Tool →</a>
+            </div>
+          </article>
+
+          <!-- Tutorial 3: Algebra & Quadratic Equations -->
+          <article class="tutorial-card">
+            <div class="tutorial-card-header">
+              <span class="tut-icon">⚖️</span>
+              <h3 class="tutorial-title">3. Algebra & Quadratic Equations</h3>
+            </div>
+            <div class="tutorial-body">
+              <p>
+                Algebra is built upon the fundamental principle of equality: performing identical operations on both sides preserves truth. For polynomial equations, quadratic forms represent parabolas.
+              </p>
+              <div class="concept-callout">
+                <strong>The Quadratic Formula:</strong>
+                $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+              </div>
+              <ul class="tut-list">
+                <li><strong>The Discriminant $\Delta = b^2 - 4ac$:</strong></li>
+                <li>If $\Delta > 0$: Two distinct real roots (parabola crosses x-axis twice).</li>
+                <li>If $\Delta = 0$: One repeated real root (parabola touches x-axis at vertex).</li>
+                <li>If $\Delta < 0$: Two complex conjugate roots $u \pm vi$ where $i = \sqrt{-1}$.</li>
+              </ul>
+              <div class="worked-example">
+                <strong>Worked Example:</strong> Solve $x^2 - 5x + 6 = 0$:
+                <br>• $a = 1, b = -5, c = 6$
+                <br>• $\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1$
+                <br>• $x = \frac{-(-5) \pm \sqrt{1}}{2(1)} = \frac{5 \pm 1}{2}$
+                <br>• $x_1 = 3, x_2 = 2$.
+              </div>
+            </div>
+            <div class="tutorial-footer">
+              <a href="#algebra-solver" class="btn-sm btn-outline">Practice in Algebra Solver →</a>
+            </div>
+          </article>
+
+          <!-- Tutorial 4: Trigonometry & Periodic Functions -->
+          <article class="tutorial-card">
+            <div class="tutorial-card-header">
+              <span class="tut-icon">🌊</span>
+              <h3 class="tutorial-title">4. Trigonometry & The Unit Circle</h3>
+            </div>
+            <div class="tutorial-body">
+              <p>
+                Trigonometry connects geometric angles with harmonic oscillations. On a unit circle of radius $r=1$, any angle $\theta$ defines coordinates $(x, y) = (\cos \theta, \sin \theta)$.
+              </p>
+              <div class="concept-callout">
+                <strong>Radians to Degrees Conversion:</strong>
+                <br>$\pi \text{ radians} = 180^\circ \implies 1 \text{ rad} = \frac{180^\circ}{\pi} \approx 57.296^\circ$.
+              </div>
+              <ul class="tut-list">
+                <li><strong>Sine ($\sin$):</strong> The vertical coordinate on the unit circle. Has range $[-1, 1]$ and period $2\pi$.</li>
+                <li><strong>Cosine ($\cos$):</strong> The horizontal coordinate on the unit circle. Shifts $\sin$ by $\pi/2$.</li>
+                <li><strong>Pythagorean Identity:</strong> $\sin^2(\theta) + \cos^2(\theta) = 1$ for all real $\theta$.</li>
+              </ul>
+              <div class="worked-example">
+                <strong>Worked Example:</strong> Evaluate $\sin(30^\circ)$:
+                <br>In degrees: $\sin(30^\circ) = 0.5$.
+                <br>In radians: $30^\circ = \pi/6 \text{ rad} \implies \sin(\pi/6) = 0.5$.
+              </div>
+            </div>
+            <div class="tutorial-footer">
+              <a href="#graph-plotter" class="btn-sm btn-outline">Plot Waves in Grapher →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top-row">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="brand-name">Math<span class="gradient-text">Sphere</span></span>
+          </div>
+          <p class="footer-tagline">"Explore Mathematics. Expand Your Mind."</p>
+          <p class="footer-desc text-muted text-sm">
+            An open-source, client-side educational platform engineered with vanilla web technologies. Designed for students, educators, and curious minds worldwide.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">Calculators & Tools</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#scientific-calculator">Scientific Calculator</a></li>
+            <li><a href="#matrix-calculator">Matrix Calculator</a></li>
+            <li><a href="#number-converter">Number System Converter</a></li>
+            <li><a href="#algebra-solver">Linear & Quadratic Solver</a></li>
+            <li><a href="#graph-plotter">Function Graph Plotter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">Learning & Practice</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#learning-hub">Number Systems Tutorial</a></li>
+            <li><a href="#learning-hub">Linear Algebra & Matrices</a></li>
+            <li><a href="#learning-hub">Algebra Equations Guide</a></li>
+            <li><a href="#learning-hub">Trigonometry & Unit Circle</a></li>
+            <li><a href="#math-quiz">Interactive Math Quiz</a></li>
+          </ul>
+        </div>
+
+        <!-- <div class="footer-links-col">
+          <h4 class="footer-col-title">Technical Specifications</h4>
+          <ul class="footer-specs-list text-muted text-sm">
+            <li>✓ HTML5, CSS3, Vanilla JS</li>
+            <li>✓ No External Libraries or CDNs</li>
+            <li>✓ Zero <code class="code-tag">eval()</code> usage</li>
+            <li>✓ GitHub Pages & Vercel Ready</li>
+            <li>✓ Accessible & Mobile Responsive</li>
+          </ul>
+        </div> -->
+      </div>
+
+      <div class="footer-bottom-row">
+        <p class="copyright-text">
+          &copy; <span id="current-year">2026</span> <strong>MathSphere</strong>. All mathematical computations run securely in your browser.
+        </p>
+        <a href="#top" class="back-to-top" aria-label="Back to top of page">
+          Back to Top ↑
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script File -->
+  <script src="script.js"></script>
+</body>
+</html>
